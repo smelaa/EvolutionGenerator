@@ -1,4 +1,4 @@
 package agh.ics.oop;
 
-public class Grass {
+public class Grass implements IMapElement{
 }
