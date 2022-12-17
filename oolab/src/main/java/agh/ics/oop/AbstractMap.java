@@ -26,4 +26,12 @@ public abstract class AbstractMap {
     }
 
     protected void placeAnimal(Vector2d spot, Animal animal){}
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
 }

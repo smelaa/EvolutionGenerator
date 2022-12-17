@@ -11,6 +11,9 @@ public class Vector2d{
         this.y=y;
     }
 
+    public Vector2d(Vector2d position) {
+    }
+
 
     public String toString() {
         return "(%d, %d)".formatted(x, y);
