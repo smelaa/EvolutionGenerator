@@ -9,6 +9,7 @@ public enum Direction {
     WESTSOUTH,
     WEST,
     WESTNORTH;
+
     public Vector2d toUnitVector(){
         return switch(this){
             case NORTH -> new Vector2d(0,1);
@@ -35,33 +36,27 @@ public enum Direction {
             case WESTNORTH -> 7;
         };
     }
+    public static Direction numberToDirection(int n){
+        return switch(n%8){
+            case 0 -> NORTH;
+            case 1 -> EASTNORTH;
+            case 2 -> EAST;
+            case 3 -> EASTSOUTH;
+            case 4 -> SOUTH;
+            case 5 -> WESTSOUTH;
+            case 6 -> WEST;
+            case 7 -> WESTNORTH;
+            default -> NORTH;
+        };
+    }
+
+    public Direction add(int n){
+        int sumInt=this.toNumber()+n;
+        return numberToDirection(sumInt);
+    }
 
     public Direction add(Direction d){
         int sumInt=this.toNumber()+d.toNumber();
-        return switch(sumInt%8){
-            case 0 -> NORTH;
-            case 1 -> EASTNORTH;
-            case 2 -> EAST;
-            case 3 -> EASTSOUTH;
-            case 4 -> SOUTH;
-            case 5 -> WESTSOUTH;
-            case 6 -> WEST;
-            case 7 -> WESTNORTH;
-            default -> this;
-        };
-    }
-    public Direction add(int n){
-        int sumInt=this.toNumber()+n;
-        return switch(sumInt%8){
-            case 0 -> NORTH;
-            case 1 -> EASTNORTH;
-            case 2 -> EAST;
-            case 3 -> EASTSOUTH;
-            case 4 -> SOUTH;
-            case 5 -> WESTSOUTH;
-            case 6 -> WEST;
-            case 7 -> WESTNORTH;
-            default -> this;
-        };
+        return numberToDirection(sumInt);
     }
 }

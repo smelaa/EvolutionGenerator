@@ -1,29 +1,20 @@
 package agh.ics.oop;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+
 
 public class TotalRandom implements IMutationModel{
     @Override
-    public void mutate(Animal child, Animal mommy, Animal daddy) {
-
-        for (int i = 0; i < child.genes.length; i++){
-            Random generator = new Random();
-
-            int newGene = generator.nextInt(8);
-
-            Direction geneToInsert = switch(newGene){
-                case 0 -> Direction.NORTH;
-                case 1 -> Direction.EASTNORTH;
-                case 2 -> Direction.EAST;
-                case 3 -> Direction.EASTSOUTH;
-                case 4 -> Direction.SOUTH;
-                case 5 -> Direction.WESTSOUTH;
-                case 6 -> Direction.WEST;
-                case 7 -> Direction.WESTNORTH;
-                default -> null;
-            };
-
-            child.genes[i] = geneToInsert;
-
+    public void mutate(Animal child) {
+        Random generator = new Random();
+        int mutationsNumber=generator.nextInt(child.genes.length);
+        List<Integer> toMutate= new ArrayList<>();
+        for (int i = 0; i < child.genes.length; i++){toMutate.add(i);}
+        for (int i = 0; i < mutationsNumber; i++){
+            Direction geneToInsert = Direction.numberToDirection(generator.nextInt(8));
+            int ix= generator.nextInt(toMutate.size());
+            child.genes[toMutate.remove(ix)] = geneToInsert;
         }
     }
 
