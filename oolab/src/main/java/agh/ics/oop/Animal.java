@@ -16,24 +16,24 @@ public class Animal implements IMapElement{
     protected int children=0;
 
     //konstruktor dla Adama i Ewy
-    public Animal(AbstractMap map, int startEnergy, int genomeLength) {
+    public Animal(SimulationVar var) {
         Random generator = new Random();
         orientation=Direction.numberToDirection(generator.nextInt(8));
-        position=new Vector2d(generator.nextInt(map.getWidth()), generator.nextInt(map.getHeight()));
-        energy=startEnergy;
-        genes= new Direction[genomeLength];
-        for (int i=0;i<genomeLength;i++){
+        position=new Vector2d(generator.nextInt(var.getMapWidth()), generator.nextInt(var.getMapHeight()));
+        energy=var.getAnimalStartEnergy();
+        genes= new Direction[var.getGenomeLength()];
+        for (int i=0;i<var.getGenomeLength();i++){
             genes[i]=Direction.numberToDirection(generator.nextInt(8));
         }
-        activeGeneIx=generator.nextInt(genomeLength);
+        activeGeneIx=generator.nextInt(var.getGenomeLength());
     }
     //konstruktor dla dzieciów
-    public Animal(IMutationModel mutationModel, Animal mommy, Animal daddy){
+    public Animal(SimulationVar var, Animal mommy, Animal daddy){
         Random generator = new Random();
         orientation=Direction.numberToDirection(generator.nextInt(8));
         position=mommy.getPosition();
-        genes= new Direction[mommy.genes.length];
-        activeGeneIx=generator.nextInt(mommy.genes.length);
+        genes= new Direction[var.getGenomeLength()];
+        activeGeneIx=generator.nextInt(var.getGenomeLength());
         int fromMommy=mommy.genesToSucceed(daddy);
         if (generator.nextBoolean()){
             try {
@@ -45,13 +45,13 @@ public class Animal implements IMapElement{
         }
         else{
             try {
-                createGenome(daddy,mommy,genes.length-fromMommy);
+                createGenome(daddy,mommy,var.getGenomeLength()-fromMommy);
             }
             catch (IllegalArgumentException exception){
                 exception.printStackTrace();
             }
         }
-        mutationModel.mutate(this);
+        var.getMutationModel().mutate(this);
     }
 
     private void createGenome(Animal parent1, Animal parent2, int intersection) throws IllegalArgumentException{
