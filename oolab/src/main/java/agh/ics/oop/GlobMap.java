@@ -1,9 +1,6 @@
 package agh.ics.oop;
 
-public class GlobMap extends AbstractMap{
+public class GlobMap implements IMapType{
 
-    @Override
-    protected void moveOnMap(Animal animal) {
 
-    }
 }

@@ -1,5 +1,7 @@
 package agh.ics.oop;
 
+import java.util.HashSet;
+
 public interface IHolyGardener {
-    void seedGrass();
+    void seedGrass(SimulationVar var, Map map);
 }
