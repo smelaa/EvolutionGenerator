@@ -1,5 +1,6 @@
 package agh.ics.oop;
 
-public interface IBehaviorModel {
 
+public interface IBehaviorModel {
+    void geneBehaviour(Animal animal);
 }
