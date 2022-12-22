@@ -9,11 +9,6 @@ public class HellMap implements IMapType {
 
     @Override
     public void moveOnMap(Animal animal, SimulationVar var, Map map){
-        Direction[] genes = animal.genes;
-        int currGeneIdx = animal.activeGeneIx;
-        int mapHeight = var.getMapHeight();
-        int mapWidth = var.getMapHeight();
-
 
         var.getBehaviorModel().geneBehaviour(animal);
 
@@ -55,38 +50,6 @@ public class HellMap implements IMapType {
             }
 
         }
-    }
-
-
-    protected void animalDinnerAndBreeding(Animal animal, SimulationVar var, Map map){
-
-        if (map.isGrassThere(animal.position)){
-            ArrayList<Animal> possibleMatch = new ArrayList<>();
-            possibleMatch.add(animal);
-            //allAnimals = listaZeZwierzaczkami
-            //for (animall : allAnimals){
-//            if (animal.position == animall.position){
-//                possibleMatch.add(animall);
-//            }
-            //}
-
-            if (possibleMatch.size() != 1){
-                possibleMatch.sort(Comparator.<Animal>comparingInt(el -> -el.energy).thenComparingInt(el->-el.age).thenComparingInt(el->-el.children));
-            }
-            Animal winner = possibleMatch.get(0);
-            winner.energy += var.getGrassEnergyProfit();
-            Animal secondWinner = possibleMatch.get(1);
-            if (winner.energy >= var.getMinEnergyForCopulation() && secondWinner.energy >= var.getMinEnergyForCopulation()){
-                Animal baby = new Animal(var, winner, secondWinner);
-                map.placeAnimal(winner.position, baby);
-            }
-
-        }
-
-
-
-
-
     }
 }
 
