@@ -30,7 +30,8 @@ public interface IMapType {
         Animal secondWinner = possibleMatch.get(1);
         if (winner.energy >= var.getMinEnergyForCopulation() && secondWinner.energy >= var.getMinEnergyForCopulation()) {
             Animal baby = new Animal(var, winner, secondWinner);
-            map.placeAnimal(winner.position, baby);
+            // tu trzeba zmienić ten fragment bo zmieniliśmy tę metodę
+            //map.placeAnimalOnMap(winner.getPosition(), baby);
         }
 
     }
