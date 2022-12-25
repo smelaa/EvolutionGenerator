@@ -5,8 +5,16 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../oolab/src/main">
       <sourceFolder url="file://$MODULE_DIR$/../../oolab/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../oolab/src/main/resources" type="java-resource" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-fxml:win:17" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-controls:17" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-controls:win:17" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-graphics:17" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-graphics:win:17" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-base:17" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-base:win:17" level="project" />
   </component>
 </module>
