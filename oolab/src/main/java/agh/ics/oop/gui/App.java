@@ -24,17 +24,11 @@ public class App extends Application{
 //    }
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/mainView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/configuration.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        primaryStage.setTitle("Evolution Simulator");
+        primaryStage.setTitle("START");
         primaryStage.setScene(scene);
         primaryStage.show();
-        Stage stage=new Stage();
-        FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("/configuration.fxml"));
-        Scene scene2 = new Scene(fxmlLoader2.load());
-        stage.setTitle("START");
-        stage.setScene(scene2);
-        stage.show();
     }
 
 }
