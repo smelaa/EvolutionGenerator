@@ -14,16 +14,12 @@ public class HellMap implements IMapType {
 
         //jeśli zwierzę może się poruszyć
         if (animal.energy - 1 >= 0){
-            changeAnimalPosition(animal, var); //zmiana pozycji
-            animalDinnerAndBreeding(animal, var, map);//obiad i dzieci
-            animal.age += 1;
-            var.getGardener().seedGrass(var, map);
-
-
+            changeAnimalPosition(animal, var, map); //zmiana pozycji
         }
         else{
             animal.diedDate = animal.age;
-            //dodajemy zwierzaka do listy zmarłych zwierząt
+            map.setDiedAnimals(map.getDiedAnimals() + 1);
+            map.addToDiedList(animal);
         }
 
 
@@ -31,7 +27,7 @@ public class HellMap implements IMapType {
     }
 
 
-    protected void changeAnimalPosition(Animal animal, SimulationVar var){
+    protected void changeAnimalPosition(Animal animal, SimulationVar var, Map map){
         Direction[] genes = animal.genes;
         int currGeneIdx = animal.activeGeneIx;
         int mapHeight = var.getMapHeight();
@@ -46,6 +42,7 @@ public class HellMap implements IMapType {
             if (animal.energy - var.getMinEnergyForCopulation() >= 0) {
                 animal.energy -= var.getMinEnergyForCopulation();
                 Random generator = new Random();
+                map.setAnimalsOnField(animal.getPosition(), posAfterMovement);
                 animal.changePosition(new Vector2d(generator.nextInt(mapWidth), generator.nextInt(mapHeight)));
             }
 

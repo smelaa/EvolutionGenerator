@@ -3,15 +3,12 @@ package agh.ics.oop;
 import java.util.Objects;
 
 public class Vector2d{
-    public int x;
-    public int y;
+    public final int x;
+    public final int y;
 
     public Vector2d (int x, int y){
         this.x=x;
         this.y=y;
-    }
-
-    public Vector2d(Vector2d position) {
     }
 
 
@@ -59,5 +56,6 @@ public class Vector2d{
     public int hashCode() {
         return Objects.hash(x, y);
     }
+
 }
 
