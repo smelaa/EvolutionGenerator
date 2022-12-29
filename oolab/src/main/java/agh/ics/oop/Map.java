@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Map {
+    public HashMap<Vector2d, Grass> getGrassOnField() {
+        return grassOnField;
+    }
+
     private HashMap<Vector2d,Grass> grassOnField = new HashMap<>();
     private int diedAnimals = 0;
     private ArrayList<Animal> animalsOnField=new ArrayList<>(); //wszystkie zwierzątka na mapie
@@ -39,7 +43,9 @@ public class Map {
 
     protected void setAnimalsOnField(Vector2d oldSpot, Vector2d newSpot){
         numberOfAnimalsOnField.put(oldSpot, numberOfAnimalsOnField.get(oldSpot) - 1); //usuwamy ze starego miejsca
-        numberOfAnimalsOnField.put(newSpot, numberOfAnimalsOnField.get(newSpot) + 1); //dodajemy do nowego miejsca
+        Integer animalsOnSpot=numberOfAnimalsOnField.remove(newSpot);
+        if (animalsOnSpot == null){animalsOnSpot=0;}
+        numberOfAnimalsOnField.put(newSpot, animalsOnSpot + 1); //dodajemy do nowego miejsca
     }
 
     protected void removeAnimal(Animal animal){
@@ -54,8 +60,29 @@ public class Map {
     protected ArrayList<Animal> getAnimalsOnField(){
         return this.animalsOnField;
     }
-    protected boolean isGrassThere(Vector2d spot){
+    public boolean isGrassThere(Vector2d spot){
         return grassOnField.containsKey(spot);
+    }
+
+    public boolean isAnimalThere(Vector2d spot){ return (numberOfAnimalsOnField.containsKey(spot) && numberOfAnimalsOnField.get(spot)>0);}
+
+    //tego też się wstydzimy
+    public ArrayList<Animal> getAnimalsOnSpot(Vector2d spot){
+        ArrayList<Animal> animalsOnSpot=new ArrayList<Animal>();
+        for (Animal animal: animalsOnField){
+            if (animal.getPosition().equals(spot)){
+                animalsOnSpot.add(animal);
+            }
+        }
+        return animalsOnSpot;
+    }
+    public Animal getAnimalOnSpot(Vector2d spot){
+        for (Animal animal: animalsOnField){
+            if (animal.getPosition().equals(spot)){
+                return animal;
+            }
+        }
+        return null;
     }
 
     protected int getDiedAnimals(){
@@ -79,7 +106,9 @@ public class Map {
     }
 
     protected void removeGrass(Grass grass){
-        grassOnField.remove(grassOnField.get(grass).getPosition(), grass);
+        if (grassOnField.get(grass)!= null) {
+            grassOnField.remove(grassOnField.get(grass).getPosition(), grass);
+        }
     }
 
     public Statistics getStats() {

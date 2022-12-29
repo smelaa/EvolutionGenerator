@@ -1,22 +1,21 @@
 package agh.ics.oop.gui;
 
-import agh.ics.oop.Animal;
-import agh.ics.oop.SimulationEngine;
-import agh.ics.oop.SimulationVar;
+import agh.ics.oop.*;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
+import javafx.scene.shape.Circle;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import static java.lang.Math.min;
 
 public class MainViewController {
+    private final Double HEIGHT=667.0;
+    private final Double WIDTH=667.0;
     @FXML
     private Label numberOfAnimals;
     @FXML
@@ -53,23 +52,6 @@ public class MainViewController {
         this.engine=engine;
         this.engineThread=engineThread;
         updateLabels();
-        //add label xy
-        Label labelxy = new Label("y/x");
-        map.getColumnConstraints().add(new ColumnConstraints());
-        map.getRowConstraints().add(new RowConstraints());
-        map.add(labelxy, 0, 0);
-        //add columns
-        for (int i = 1; i <= engine.getMapWidth(); i++){
-            Label label = new Label(Integer.toString(i));
-            map.getColumnConstraints().add(new ColumnConstraints());
-            map.add(label, i, 0);
-        }
-        //add rows
-        for (int i =1 ; i <= engine.getMapHeight(); i++){
-            Label label = new Label(Integer.toString(i));
-            map.getRowConstraints().add(new RowConstraints());
-            map.add(label, 0, i);
-        }
         map.setGridLinesVisible(true);
         mapBox.getChildren().addAll(map);
     }
@@ -87,26 +69,57 @@ public class MainViewController {
     }
 
     private void updateLabels(){
-        numberOfAnimals.setText(String.valueOf(engine.getMapStats().getAmountOfAnimals()));
-        amountOfGrass.setText(String.valueOf(engine.getMapStats().getAmountOfGrass()));
-        numberOfEmptyFields.setText(String.valueOf(engine.getMapStats().freeSpots()));
-        theMostPopularGenome.setText(engine.getMapStats().theMostCommonGenotype());
-        averageEnergyLevel.setText(String.valueOf(engine.getMapStats().averageEnergyAlive()));
-        averageDeadEnergyLevel.setText(String.valueOf(engine.getMapStats().averageEnergyDead()));
+        Platform.runLater(()->{
+            numberOfAnimals.setText(String.valueOf(engine.getMapStats().getAmountOfAnimals()));
+            amountOfGrass.setText(String.valueOf(engine.getMapStats().getAmountOfGrass()));
+            numberOfEmptyFields.setText(String.valueOf(engine.getMapStats().freeSpots()));
+            theMostPopularGenome.setText(engine.getMapStats().theMostCommonGenotype());
+            averageEnergyLevel.setText(String.valueOf(engine.getMapStats().averageEnergyAlive()));
+            averageDeadEnergyLevel.setText(String.valueOf(engine.getMapStats().averageEnergyDead()));
+        });
     }
     private void updateFollowedAnimalLabels(){
         //updatuje informacje w labelach śledzonego zwierzaka
     }
 
     public void renderMap(){
-        //updatuje mapę o aktualne położenie zwierzakó
+        Platform.runLater(()->{
+            map.setGridLinesVisible(false);
+            map.getChildren().clear();
+            map.getColumnConstraints().clear();
+            map.getRowConstraints().clear();
+            map.setGridLinesVisible(true);
+            for (int x=0;x<engine.getMap().getWidth();x++){
+                for (int y=0;y< engine.getMap().getHeight();y++){
+                    Vector2d position = new Vector2d(x,y);
+                    GridPane newPane=new GridPane();
+                    newPane.getColumnConstraints().add(new ColumnConstraints(WIDTH/engine.getMap().getWidth()));
+                    newPane.getRowConstraints().add(new RowConstraints(HEIGHT/engine.getMap().getHeight()));
+                    newPane.setGridLinesVisible(true);
+                    if (engine.getMap().isGrassThere(position)){
+                        newPane.setStyle("-fx-background-color: #65ff00;");
+                    }
+                    else{
+                        newPane.setStyle("-fx-background-color: #aa67f1;");
+                    }
+                    if(engine.getMap().isAnimalThere(position)){
+                        Animal animal=engine.getMap().getAnimalOnSpot(position);
+                        Circle animalImage=animal.getImage(min(WIDTH/engine.getMap().getWidth(),HEIGHT/engine.getMap().getHeight()));
+                        newPane.add(animalImage,0,0);
+                        newPane.setHalignment(animalImage, HPos.CENTER);
+                    }
+                    map.add(newPane,x,y);
+
+                }
+            }
+        });
     }
 
+
     public void newDayUpdate(){
-        //renderMap
-        //updateLabels
+        updateLabels();
+        renderMap();
         //updateFollowedAnimalLabels
-        //jeżeli jest 0 zwierzaków to wywołaj stopSimulation
     }
 
     public void stopSimulation(){
