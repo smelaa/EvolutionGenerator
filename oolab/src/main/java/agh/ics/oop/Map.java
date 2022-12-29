@@ -1,10 +1,7 @@
 package agh.ics.oop;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class Map {
     private HashMap<Vector2d,Grass> grassOnField = new HashMap<>();
@@ -12,6 +9,7 @@ public class Map {
     private ArrayList<Animal> animalsOnField=new ArrayList<>(); //wszystkie zwierzątka na mapie
     private HashMap<Vector2d,Integer> numberOfAnimalsOnField = new HashMap<>(); //pamietac zeby przy move zmieniac wartosc w tej hashmapie
     private ArrayList<Animal> diedAnimalsOnMap = new ArrayList<>();
+    private Statistics stats;
     private int height;
     private int width;
     private IMapType map;
@@ -22,6 +20,7 @@ public class Map {
         height=var.getMapHeight();
         width= var.getMapWidth();
         map = var.getMapType();
+        stats=new Statistics(this);
         for (int i=0;i<var.getAnimalsAtStart();i++){
             Animal newAnimal= new Animal(var);
             placeAnimalOnMap(newAnimal);
@@ -83,7 +82,16 @@ public class Map {
         grassOnField.remove(grassOnField.get(grass).getPosition(), grass);
     }
 
-
-
-
+    public Statistics getStats() {
+        return stats;
+    }
+    public int getHeight() {
+        return height;
+    }
+    public int getWidth() {
+        return width;
+    }
+    public int getNumberOfGrassOnField() {
+        return grassOnField.size();
+    }
 }

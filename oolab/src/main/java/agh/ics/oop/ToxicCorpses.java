@@ -11,14 +11,14 @@ public class ToxicCorpses implements IHolyGardener{
         //wylosujemy liczbę od 0 do 9
         //w zaleznosci od wylosowanej liczby wylosujemy vector z 20% pól na których umarło najmniej zwierzakow lub 80% pozostałych pól
         //zasadzimy trawke
-        ArrayList<Vector2d> positions= new ArrayList<>(var.getStats().getDiedAnimals().keySet());
+        ArrayList<Vector2d> positions= new ArrayList<>(map.getStats().getDiedAnimals().keySet());
         for (Vector2d position: positions){
             if(map.isGrassThere(position)){positions.remove(position);}
         }
         positions.sort(new Comparator<Vector2d>() {
             @Override
             public int compare(Vector2d o1, Vector2d o2) {
-                return var.getStats().getDiedAnimals().get(o1)-var.getStats().getDiedAnimals().get(o2);
+                return map.getStats().getDiedAnimals().get(o1)-map.getStats().getDiedAnimals().get(o2);
             }
         });
         Random generator = new Random();

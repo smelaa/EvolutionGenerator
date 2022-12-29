@@ -1,21 +1,22 @@
 package agh.ics.oop;
 
+import agh.ics.oop.gui.MainViewApp;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Vector;
 
-public class SimulationEngine implements ISimulationEngine{
+
+public class SimulationEngine implements Runnable{
     SimulationVar variables;
     private Map map;
     private int howManyDays = 0;
-    private Statistics stats;
+    private MainViewApp observer;
 
 
 
-    public SimulationEngine(Map map, SimulationVar variables){
-        this.map = map;
+    public SimulationEngine(SimulationVar variables, MainViewApp observer){
+        this.map = new Map(variables);
         this.variables = variables;
+        this.observer=observer;
     }
 
     public void dayRitual(IMapType mapType, Map map){
@@ -75,7 +76,7 @@ public class SimulationEngine implements ISimulationEngine{
         //zasianie roślin
         variables.getGardener().seedGrass(variables, map);
 
-
+        observer.newDayUpdate();
     }
 
     protected int getDays(){
@@ -85,14 +86,20 @@ public class SimulationEngine implements ISimulationEngine{
     @Override
     public void run() {
         Object[] statistics = new Object[]{
-                stats.getAmountOfAnimals(map),
-                stats.getAmountOfGrass(variables, this),
-                stats.freeSpots(map, variables),
-                stats.theMostCommonGenotype(map),
-                stats.averageEnergyAlive(map),
-                stats.averageEnergyDead(map)
+                map.getStats().getAmountOfAnimals(),
+                map.getStats().getAmountOfGrass(),
+                map.getStats().freeSpots(),
+                map.getStats().theMostCommonGenotype(),
+                map.getStats().averageEnergyAlive(),
+                map.getStats().averageEnergyDead()
 
         };
 
     }
+
+    public Statistics getMapStats(){return map.getStats();}
+    public int getMapHeight(){return map.getHeight();}
+    public int getMapWidth(){return map.getWidth();}
+
+
 }

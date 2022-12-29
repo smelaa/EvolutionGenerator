@@ -3,12 +3,15 @@ package agh.ics.oop;
 import java.util.*;
 
 public class Statistics {
-    private int amountOfGrass;
-    private HashMap<Vector2d, Integer> diedAnimals;
+    private Map map;
 
-    public Statistics(SimulationVar var) {
-        for(int x=0;x<var.getMapWidth();x++){
-            for(int y=0;y<var.getMapHeight();y++)
+    private int amountOfGrass;
+    private HashMap<Vector2d, Integer> diedAnimals=new HashMap<Vector2d, Integer>();
+
+    public Statistics(Map map) {
+        this.map=map;
+        for(int x=0;x<map.getWidth();x++){
+            for(int y=0;y<map.getHeight();y++)
             {
                 diedAnimals.put(new Vector2d(x,y),0);
             }
@@ -20,24 +23,24 @@ public class Statistics {
         return diedAnimals;
     }
 
-    public int getAmountOfAnimals(Map map){ //liczba wszystkich zwierząt na mapie
-        return map.getDiedAnimals() + map.getAnimalsOnField().size();
+    public int getAmountOfAnimals(){ //liczba wszystkich zwierząt na mapie
+        return map.getAnimalsOnField().size();
     }
 
     //liczba wszystkich roślin (tutaj chyba trzeba jakoś mądrzej, żeby nie przekazywać engine)
-    public int getAmountOfGrass(SimulationVar var, SimulationEngine engine){
-        return var.getGrassSpawnedEveryday() * engine.getDays();
+    public int getAmountOfGrass(){
+        return map.getNumberOfGrassOnField();
     }
 
     //liczba wolnych pól
-    public int freeSpots(Map map, SimulationVar var){
-        int allSpots = var.getMapHeight() * var.getMapHeight();
+    public int freeSpots(){
+        int allSpots = map.getWidth() * map.getHeight();
         int busySpots = map.getAnimalsOnEachSpot().size();
         return allSpots - busySpots;
     }
 
     //najpopularniejszy genotyp
-    public Direction[] theMostCommonGenotype(Map map){
+    public String theMostCommonGenotype(){
         int maxi = 1;
         Direction[] popular = new Direction[]{};
 
@@ -57,14 +60,15 @@ public class Statistics {
                 genotypes.put(animal.genes, 1);
             }
         }
-
-        return popular;
-
-
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Direction gene: popular){
+            stringBuilder.append(gene.toString());
+        }
+        return stringBuilder.toString();
     }
 
     //średnia energia żyjących zwierząt
-    public int averageEnergyAlive(Map map){
+    public int averageEnergyAlive(){
         int sum = 0;
         for(Animal animal : map.getAnimalsOnField()){
             sum += animal.energy;
@@ -74,7 +78,8 @@ public class Statistics {
     }
 
     //średnia długość życia nieżyjących zwierząt
-    public int averageEnergyDead(Map map){
+    public int averageEnergyDead(){
+        if (map.getDiedAnimalsOnMap().size()==0){return 0;}
         int sum = 0;
         for (Animal animal : map.getDiedAnimalsOnMap()){
             sum += animal.energy;
