@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="agh.ics.oop.gui.ConfigurationController">
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="agh.ics.oop.gui.ConfigurationController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="191.5" minWidth="4.0" prefWidth="55.5" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="505.5" minWidth="10.0" prefWidth="243.5" />
