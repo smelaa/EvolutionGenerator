@@ -1,5 +1,8 @@
 package agh.ics.oop;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SimulationVar {
     private final IMapType mapType;
     private final IHolyGardener gardener;
@@ -17,7 +20,8 @@ public class SimulationVar {
     private final int refreshTime;
     private final int genomeLength;
     //trzeba tu zrobić jakiś konstruktor, który byłby w stanie wczytać te rzeczy z pliku
-    public SimulationVar() {
+    public SimulationVar(List<String> var) {
+
         this.genomeLength = 0;
         this.stats=null;
         this.mapType = null;

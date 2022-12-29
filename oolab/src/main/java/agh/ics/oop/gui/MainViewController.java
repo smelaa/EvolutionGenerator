@@ -80,6 +80,11 @@ public class MainViewController implements Initializable {
         //renderMap
         //updateLabels
         //updateFollowedAnimalLabels
+        //jeżeli jest 0 zwierzaków to wywołaj stopSimulation
+    }
+
+    public void stopSimulation(){
+
     }
 
 }

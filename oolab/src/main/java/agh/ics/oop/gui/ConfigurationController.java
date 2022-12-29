@@ -1,10 +1,13 @@
 package agh.ics.oop.gui;
 
+import agh.ics.oop.OptionsParser;
+import agh.ics.oop.SimulationVar;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -20,11 +23,10 @@ public class ConfigurationController implements Initializable {
     @FXML
     public void startSimulation(){
         try{
-            String path= filePath.getText();
-            //tu trzeba spróbować wczytać plik konfiguracyjny
+            SimulationVar var=  new OptionsParser().parse(filePath.getText());
             infoLabel.setText("Your simulation is opened in a new window. You can start another one.");
-            //i odpalić symulacje w nowym wątku
+            new MainViewController(var);
         }
-        catch(Exception exception){infoLabel.setText("Wrong config file path. Try again.");}
+        catch(FileNotFoundException exception){infoLabel.setText("Wrong config file path. Try again.");}
     }
 }
