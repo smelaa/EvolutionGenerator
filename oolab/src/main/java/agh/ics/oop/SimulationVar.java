@@ -1,6 +1,5 @@
 package agh.ics.oop;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SimulationVar {
@@ -8,7 +7,6 @@ public class SimulationVar {
     private final IHolyGardener gardener;
     private final IMutationModel mutationModel;
     private final IBehaviorModel behaviorModel;
-    private Statistics stats;
     private final int mapHeight;
     private final int mapWidth;
     private final int grassEnergyProfit;
@@ -19,24 +17,47 @@ public class SimulationVar {
     private final int grassSpawnedEveryday;
     private final int refreshTime;
     private final int genomeLength;
-    //trzeba tu zrobić jakiś konstruktor, który byłby w stanie wczytać te rzeczy z pliku
-    public SimulationVar(List<String> var) {
-
-        this.genomeLength = 0;
-        this.stats=null;
-        this.mapType = null;
-        this.gardener = null;
-        this.mutationModel = null;
-        this.behaviorModel = null;
-        this.mapHeight = 0;
-        this.mapWidth = 0;
-        this.grassEnergyProfit = 0;
-        this.minEnergyForCopulation = 0;
-        this.animalStartEnergy = 0;
-        this.dailyEnergyCost = 0;
-        this.animalsAtStart = 0;
-        this.grassSpawnedEveryday = 0;
-        this.refreshTime = 0;
+    //bardzo brzydkie, aż nam wstyd:(
+    public SimulationVar(List<String> var) throws IllegalArgumentException{
+        if (var.size()!=14){throw new IllegalArgumentException("wrong number of arguments");}
+        switch(var.get(0)){
+            case "GlobMap"->this.mapType=new GlobMap();
+            case "HellMap"->this.mapType=new HellMap();
+            default -> throw new IllegalArgumentException("wrong argument");
+        }
+        switch(var.get(1)){
+            case "ToxicCorpses"->this.gardener=new ToxicCorpses();
+            case "ForestedEquators"->this.gardener=new ForestedEquators();
+            default -> throw new IllegalArgumentException("wrong argument");
+        }
+        switch(var.get(2)){
+            case "LittleAdjustment"->this.mutationModel=new LittleAdjustment();
+            case "TotalRandom"->this.mutationModel=new TotalRandom();
+            default -> throw new IllegalArgumentException("wrong argument");
+        }
+        switch(var.get(3)){
+            case "HijinksBehavior"->this.behaviorModel=new HijinksBehavior();
+            case "PredestinationBehavior"->this.behaviorModel=new PredestinationBehavior();
+            default -> throw new IllegalArgumentException("wrong argument");
+        }
+        Integer[] ints=new Integer[10];
+        for (int i=4;i<14;i++){
+            try {
+                if (Integer.parseInt(var.get(i))<=0){throw new IllegalArgumentException("wrong argument");}
+                ints[i-4]= Integer.parseInt(var.get(i));
+            }
+            catch (NumberFormatException e) {throw new IllegalArgumentException("wrong argument");}
+        }
+        this.mapHeight=ints[0];
+        this.mapWidth=ints[1];
+        this.grassEnergyProfit=ints[2];
+        this.minEnergyForCopulation=ints[3];
+        this.animalStartEnergy=ints[4];
+        this.dailyEnergyCost=ints[5];
+        this.animalsAtStart=ints[6];
+        this.grassSpawnedEveryday=ints[7];
+        this.refreshTime=ints[8];
+        this.genomeLength=ints[9];
     }
 
 
@@ -96,7 +117,4 @@ public class SimulationVar {
         return genomeLength;
     }
 
-    public Statistics getStats() {
-        return stats;
-    }
 }

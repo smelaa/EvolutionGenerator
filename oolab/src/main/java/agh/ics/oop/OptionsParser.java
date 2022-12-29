@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class OptionsParser {
-    public SimulationVar parse(String filePath) throws FileNotFoundException {
+    public SimulationVar parse(String filePath) throws FileNotFoundException, IllegalArgumentException {
         try {
             Paths.get(filePath);
             Scanner scanner = new Scanner(new File(filePath));
@@ -21,6 +21,8 @@ public class OptionsParser {
 
         } catch (InvalidPathException | NullPointerException | FileNotFoundException ex) {
             throw new FileNotFoundException();
+        }catch(IllegalArgumentException ex){
+            throw new IllegalArgumentException();
         }
 
     }
