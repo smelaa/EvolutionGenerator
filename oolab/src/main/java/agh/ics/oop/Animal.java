@@ -1,10 +1,15 @@
 package agh.ics.oop;
 
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+
 import java.util.Random;
 
+import static java.lang.Math.min;
 import static java.lang.Math.round;
+import static java.lang.Math.max;
 
-public class Animal implements IMapElement{
+public class Animal {
     protected Direction orientation;
     protected Vector2d position;
     protected int energy;
@@ -65,10 +70,6 @@ public class Animal implements IMapElement{
         }
         else{throw new IllegalArgumentException("wrong genome intersection point");}
     }
-    @Override
-    public String getImageName() {
-        return null;
-    }
 
     public void changePosition(Vector2d newPosition){
         this.position=newPosition;
@@ -88,5 +89,11 @@ public class Animal implements IMapElement{
 
     public int genesToSucceed(Animal other){
         return round(energy/(other.getEnergy()+energy)*genes.length);
+    }
+
+    public Circle getImage(Double size) {
+        Color color=new Color(max(0,(237-energy)/255),min((7+energy)/255,255),107/255,1);
+        Circle circle = new Circle(size/2, color);
+        return circle;
     }
 }

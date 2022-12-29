@@ -2,6 +2,7 @@ package agh.ics.oop;
 
 import java.util.*;
 
+import static java.lang.Math.max;
 import static java.lang.Math.round;
 
 public class ToxicCorpses implements IHolyGardener{
@@ -11,9 +12,10 @@ public class ToxicCorpses implements IHolyGardener{
         //wylosujemy liczbę od 0 do 9
         //w zaleznosci od wylosowanej liczby wylosujemy vector z 20% pól na których umarło najmniej zwierzakow lub 80% pozostałych pól
         //zasadzimy trawke
-        ArrayList<Vector2d> positions= new ArrayList<>(map.getStats().getDiedAnimals().keySet());
-        for (Vector2d position: positions){
-            if(map.isGrassThere(position)){positions.remove(position);}
+        ArrayList<Vector2d> positionsIterator= new ArrayList<>(map.getStats().getDiedAnimals().keySet());
+        ArrayList<Vector2d> positions= new ArrayList<Vector2d>();
+        for (Vector2d position: positionsIterator){
+            if(!map.isGrassThere(position)){positions.add(position);}
         }
         positions.sort(new Comparator<Vector2d>() {
             @Override
@@ -26,7 +28,7 @@ public class ToxicCorpses implements IHolyGardener{
             if (positions.size()==0){break;}
             Vector2d newGrassPosition;
             if(generator.nextInt(10)>=2){
-                int ix=generator.nextInt((int) round(positions.size()*0.2));
+                int ix=generator.nextInt(max((int) round(positions.size()*0.2),1));
                 newGrassPosition=positions.remove(ix);
             }
             else{

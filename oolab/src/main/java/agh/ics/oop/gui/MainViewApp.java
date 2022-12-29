@@ -19,6 +19,7 @@ public class MainViewApp extends Application {
         engine=new SimulationEngine(var, this);
         engineThread=new Thread(engine);
         start(new Stage());
+        engineThread.start();
     }
 
     @Override
