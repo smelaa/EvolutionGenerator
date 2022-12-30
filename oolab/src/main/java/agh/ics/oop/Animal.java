@@ -19,9 +19,11 @@ public class Animal {
     protected int diedDate=0;
     protected int age=0;
     protected int children=0;
+    private Map map;
 
     //konstruktor dla Adama i Ewy
-    public Animal(SimulationVar var) {
+    public Animal(SimulationVar var,Map map) {
+        this.map=map;
         Random generator = new Random();
         orientation=Direction.numberToDirection(generator.nextInt(8));
         position=new Vector2d(generator.nextInt(var.getMapWidth()), generator.nextInt(var.getMapHeight()));
@@ -35,6 +37,7 @@ public class Animal {
     //konstruktor dla dzieciów
     public Animal(SimulationVar var, Animal mommy, Animal daddy){
         Random generator = new Random();
+        map=mommy.getMap();
         orientation=Direction.numberToDirection(generator.nextInt(8));
         position=mommy.getPosition();
         genes= new Direction[var.getGenomeLength()];
@@ -92,8 +95,15 @@ public class Animal {
     }
 
     public Circle getImage(Double size) {
-        Color color=new Color(max(0,(237-energy)/255),min((7+energy)/255,255),107/255,1);
+        Color color;
+        try{
+            color=new Color((double) (map.getMaxEnergy() - energy) /map.getMaxEnergy(),0, (double) energy /map.getMaxEnergy(),1);
+        }
+        catch(Exception ex){color=Color.BLACK; ex.printStackTrace();}
         Circle circle = new Circle(size/2, color);
         return circle;
+    }
+    public Map getMap() {
+        return map;
     }
 }

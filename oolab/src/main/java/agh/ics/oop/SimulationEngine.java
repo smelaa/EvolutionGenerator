@@ -83,7 +83,8 @@ public class SimulationEngine implements Runnable{
 
         //zasianie roślin
         variables.getGardener().seedGrass(variables, map);
-
+        //update informacji o maksymalnej enrgii
+        map.updateMaxEnergy();
         observer.newDayUpdate();
     }
 
@@ -104,8 +105,8 @@ public class SimulationEngine implements Runnable{
 //        };
 
         while(map.getStats().getAmountOfAnimals()>0){
-            dayRitual();
-            observer.newDayUpdate();
+            Platform.runLater(()->{dayRitual();});
+            Platform.runLater(()->{observer.newDayUpdate();});
             try {
                 Thread.sleep(variables.getRefreshTime());
             } catch (InterruptedException e) {
