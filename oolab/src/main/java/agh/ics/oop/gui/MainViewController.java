@@ -1,12 +1,8 @@
 package agh.ics.oop.gui;
 
 import agh.ics.oop.*;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
@@ -45,23 +41,21 @@ public class MainViewController {
     @FXML
     private HBox mapBox;
     private GridPane map=new GridPane();
-    private Thread engineThread;
     private SimulationEngine engine;
 
-    public void initial(SimulationEngine engine, Thread engineThread) {
+    public void initial(SimulationEngine engine) {
         this.engine=engine;
-        this.engineThread=engineThread;
         updateLabels();
         map.setGridLinesVisible(true);
         mapBox.getChildren().addAll(map);
     }
     @FXML
     public void playButtonAction(){
-
+        engine.play();
     }
     @FXML
     public void pauseButtonAction(){
-
+        engine.pause();
     }
     @FXML
     public void stopFollowingAnimal(){
@@ -120,7 +114,7 @@ public class MainViewController {
     }
 
     public void stopSimulation(){
-        engineThread.interrupt();
+        engine.stop();
         //cos tam nam zrob
     }
 

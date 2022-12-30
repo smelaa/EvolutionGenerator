@@ -27,7 +27,7 @@ public class MainViewApp extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/mainView.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         controller=fxmlLoader.getController();
-        controller.initial(engine, engineThread);
+        controller.initial(engine);
         primaryStage.setTitle("Evolution simulation");
         primaryStage.setScene(scene);
         primaryStage.show();

@@ -14,7 +14,7 @@ public class SimulationEngine implements Runnable{
     private Map map;
     private int howManyDays = 0;
     private MainViewApp observer;
-
+    private boolean threadSuspended=false;
 
 
     public SimulationEngine(SimulationVar variables, MainViewApp observer){
@@ -91,6 +91,18 @@ public class SimulationEngine implements Runnable{
     protected int getDays(){
         return howManyDays;
     }
+    public void pause(){
+        threadSuspended=true;
+    }
+    public void play(){
+        if (threadSuspended) {
+            threadSuspended = false;
+            synchronized(this) {
+                notify();
+            }
+        }
+    }
+    public void stop(){}
 
     @Override
     public void run() {
@@ -109,11 +121,14 @@ public class SimulationEngine implements Runnable{
             Platform.runLater(()->{observer.newDayUpdate();});
             try {
                 Thread.sleep(variables.getRefreshTime());
+                synchronized(this) {
+                    while (threadSuspended)
+                        wait();
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-
     }
 
     public Statistics getMapStats(){return map.getStats();}
