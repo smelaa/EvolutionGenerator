@@ -39,7 +39,12 @@ public class Map {
     }
 
     protected void setAnimalsOnField(Vector2d oldSpot, Vector2d newSpot){
-        numberOfAnimalsOnField.put(oldSpot, numberOfAnimalsOnField.get(oldSpot) - 1); //usuwamy ze starego miejsca
+        int old = numberOfAnimalsOnField.remove(oldSpot);
+        if (old - 1 > 0){
+            numberOfAnimalsOnField.put(oldSpot, old - 1); //usuwamy ze starego miejsca
+        }
+
+
         Integer animalsOnSpot=numberOfAnimalsOnField.remove(newSpot);
         if (animalsOnSpot == null){animalsOnSpot=0;}
         numberOfAnimalsOnField.put(newSpot, animalsOnSpot + 1); //dodajemy do nowego miejsca
@@ -47,7 +52,10 @@ public class Map {
 
     protected void removeAnimal(Animal animal){
         animalsOnField.remove(animal); //usunięcie z listy zwierząt
-        numberOfAnimalsOnField.put(animal.getPosition(), numberOfAnimalsOnField.get(animal.getPosition()) - 1); //dekrementowanie liczby zwierząt na tym polu
+        int tmp = numberOfAnimalsOnField.remove(animal.getPosition());
+        if (tmp - 1 != 0){
+            numberOfAnimalsOnField.put(animal.getPosition(), tmp - 1);
+        }
     }
     protected int howManyAnimalsOnSpot(Vector2d spot){ //zwraca liczbę zwierzątek na danych polu
         return numberOfAnimalsOnField.get(spot);
@@ -103,8 +111,8 @@ public class Map {
     }
 
     protected void removeGrass(Grass grass){
-        if (grassOnField.get(grass)!= null) {
-            grassOnField.remove(grassOnField.get(grass).getPosition(), grass);
+        if (grassOnField.get(grass.getPosition())!= null) {
+            grassOnField.remove(grass.getPosition());
         }
     }
 

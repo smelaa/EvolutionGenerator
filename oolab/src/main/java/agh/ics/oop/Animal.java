@@ -42,6 +42,11 @@ public class Animal {
         position=mommy.getPosition();
         genes= new Direction[var.getGenomeLength()];
         activeGeneIx=generator.nextInt(var.getGenomeLength());
+        int energy1 = mommy.energy / 2;
+        int energy2 = daddy.energy / 2;
+        energy = energy1 + energy2;
+        mommy.energy -= energy1;
+        daddy.energy -= energy2;
         int fromMommy=mommy.genesToSucceed(daddy);
         if (generator.nextBoolean()){
             try {
@@ -105,5 +110,9 @@ public class Animal {
     }
     public Map getMap() {
         return map;
+    }
+
+    public int getAge(){
+        return age;
     }
 }

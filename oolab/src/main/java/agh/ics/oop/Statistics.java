@@ -29,48 +29,66 @@ public class Statistics {
         return map.getAnimalsOnField().size();
     }
 
-    //liczba wszystkich roślin (tutaj chyba trzeba jakoś mądrzej, żeby nie przekazywać engine)
+    //liczba wszystkich roślin
     public int getAmountOfGrass(){
         return map.getNumberOfGrassOnField();
     }
 
-    //liczba wolnych pól
+    //liczba wolnych pól (t pole, gdzie nie ma zwierzątek)
     public int freeSpots(){
         int allSpots = map.getWidth() * map.getHeight();
         int busySpots = map.getAnimalsOnEachSpot().size();
-        return allSpots - busySpots;
+        if(allSpots - busySpots > 0){
+            return allSpots - busySpots;
+        }
+        else{
+            return 0;
+        }
     }
 
     //najpopularniejszy genotyp
     public String theMostCommonGenotype(){
-        int maxi = 1;
-        Direction[] popular = new Direction[]{};
+        int maxi = 0;
+        String popular = "";
 
-        HashMap<Direction[], Integer> genotypes = new HashMap<Direction[], Integer>();
+        HashMap<String, Integer> genotypes = new HashMap<String, Integer>();
         ArrayList<Animal> animals = map.getAnimalsOnField();
 
+//to jest straszne, trzeba poprawić - nie zawsze działa, nie rozumiem dlaczego czasami jest a czasami nie
         for (Animal animal: animals){
-            if (genotypes.containsKey(animal.genes)){
-                int count = genotypes.get(animal.genes);
-                genotypes.put(animal.genes, count + 1);
+            String gene = "";
+            for (Direction genes : animal.genes){
+                gene += genes.toString();
+            }
+
+            if (genotypes.containsKey(gene)){
+                int count = genotypes.remove(gene);
+                genotypes.put(gene, count + 1);
                 if (count + 1 > maxi){
                     maxi = count + 1;
-                    popular = animal.genes;
+                    popular = gene;
                 }
             }
             else{
-                genotypes.put(animal.genes, 1);
+                genotypes.put(gene, 1);
             }
         }
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Direction gene: popular){
-            stringBuilder.append(gene.toString());
-        }
-        return stringBuilder.toString();
+
+        return popular;
+
+//        StringBuilder stringBuilder = new StringBuilder();
+//        for (Direction gene: popular){
+//            stringBuilder.append(gene.toString());
+//        }
+//
+//        return stringBuilder.toString();
     }
 
     //średnia energia żyjących zwierząt
     public int averageEnergyAlive(){
+        if (map.getAnimalsOnField().size() == 0){
+            return 0;
+        }
         int sum = 0;
         for(Animal animal : map.getAnimalsOnField()){
             sum += animal.energy;
@@ -89,13 +107,14 @@ public class Statistics {
     }
 
     //średnia długość życia nieżyjących zwierząt
-    public int averageEnergyDead(){
+    public int averageAgeDead(){
         if (map.getDiedAnimalsOnMap().size()==0){return 0;}
         int sum = 0;
         for (Animal animal : map.getDiedAnimalsOnMap()){
-            sum += animal.energy;
+            sum += animal.diedDate;
         }
-        return sum / map.getDiedAnimalsOnMap().size();
+
+        return sum / map.getDiedAnimals();
     }
 
 
