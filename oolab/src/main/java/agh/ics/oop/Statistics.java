@@ -2,6 +2,8 @@ package agh.ics.oop;
 
 import java.util.*;
 
+import static java.lang.Math.max;
+
 public class Statistics {
     private Map map;
 
@@ -75,6 +77,15 @@ public class Statistics {
         }
 
         return sum / map.getAnimalsOnField().size();
+    }
+
+    public int maxEnergyAlive(){
+        int maxEnergy = 0;
+        for(Animal animal : map.getAnimalsOnField()){
+            maxEnergy=max(animal.energy,maxEnergy);
+        }
+
+        return maxEnergy;
     }
 
     //średnia długość życia nieżyjących zwierząt

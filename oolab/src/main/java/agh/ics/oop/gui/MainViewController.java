@@ -69,21 +69,18 @@ public class MainViewController {
     }
 
     private void updateLabels(){
-        Platform.runLater(()->{
             numberOfAnimals.setText(String.valueOf(engine.getMapStats().getAmountOfAnimals()));
             amountOfGrass.setText(String.valueOf(engine.getMapStats().getAmountOfGrass()));
             numberOfEmptyFields.setText(String.valueOf(engine.getMapStats().freeSpots()));
             theMostPopularGenome.setText(engine.getMapStats().theMostCommonGenotype());
             averageEnergyLevel.setText(String.valueOf(engine.getMapStats().averageEnergyAlive()));
             averageDeadEnergyLevel.setText(String.valueOf(engine.getMapStats().averageEnergyDead()));
-        });
     }
     private void updateFollowedAnimalLabels(){
         //updatuje informacje w labelach śledzonego zwierzaka
     }
 
     public void renderMap(){
-        Platform.runLater(()->{
             map.setGridLinesVisible(false);
             map.getChildren().clear();
             map.getColumnConstraints().clear();
@@ -97,10 +94,10 @@ public class MainViewController {
                     newPane.getRowConstraints().add(new RowConstraints(HEIGHT/engine.getMap().getHeight()));
                     newPane.setGridLinesVisible(true);
                     if (engine.getMap().isGrassThere(position)){
-                        newPane.setStyle("-fx-background-color: #65ff00;");
+                        newPane.setStyle("-fx-background-color: #b9fcf4;");
                     }
                     else{
-                        newPane.setStyle("-fx-background-color: #aa67f1;");
+                        newPane.setStyle("-fx-background-color: #ffa8ec;");
                     }
                     if(engine.getMap().isAnimalThere(position)){
                         Animal animal=engine.getMap().getAnimalOnSpot(position);
@@ -112,7 +109,7 @@ public class MainViewController {
 
                 }
             }
-        });
+
     }
 
 

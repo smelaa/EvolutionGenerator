@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Map {
-    public HashMap<Vector2d, Grass> getGrassOnField() {
-        return grassOnField;
-    }
-
     private HashMap<Vector2d,Grass> grassOnField = new HashMap<>();
     private int diedAnimals = 0;
     private ArrayList<Animal> animalsOnField=new ArrayList<>(); //wszystkie zwierzątka na mapie
@@ -17,7 +13,7 @@ public class Map {
     private int height;
     private int width;
     private IMapType map;
-    private int howManyGrasses = 0;
+    private int maxEnergy=0;
 
     //Big Bang
     public Map(SimulationVar var) {
@@ -25,8 +21,9 @@ public class Map {
         width= var.getMapWidth();
         map = var.getMapType();
         stats=new Statistics(this);
+        updateMaxEnergy();
         for (int i=0;i<var.getAnimalsAtStart();i++){
-            Animal newAnimal= new Animal(var);
+            Animal newAnimal= new Animal(var,this);
             placeAnimalOnMap(newAnimal);
         }
         var.getGardener().seedGrass(var, this);
@@ -122,5 +119,17 @@ public class Map {
     }
     public int getNumberOfGrassOnField() {
         return grassOnField.size();
+    }
+
+    public int getMaxEnergy() {
+        return maxEnergy;
+    }
+
+    public void updateMaxEnergy() {
+        maxEnergy=stats.maxEnergyAlive();
+    }
+
+    public HashMap<Vector2d, Grass> getGrassOnField() {
+        return grassOnField;
     }
 }
