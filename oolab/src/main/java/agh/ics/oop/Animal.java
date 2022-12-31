@@ -104,7 +104,7 @@ public class Animal {
         try{
             color=new Color((double) (map.getMaxEnergy() - energy) /map.getMaxEnergy(),0, (double) energy /map.getMaxEnergy(),1);
         }
-        catch(Exception ex){color=Color.BLACK; ex.printStackTrace();}
+        catch(Exception ex){color=Color.BLACK; ex.printStackTrace(); ex.printStackTrace();}
         Circle circle = new Circle(size/2, color);
         return circle;
     }
