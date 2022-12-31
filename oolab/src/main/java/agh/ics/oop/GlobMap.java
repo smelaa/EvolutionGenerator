@@ -12,8 +12,10 @@ public class GlobMap implements IMapType{
         var.getBehaviorModel().geneBehaviour(animal);
 
         //jeśli zwierzę może się poruszyć
-        if (animal.energy - 1 >= 0){
+        if (animal.energy - var.getDailyEnergyCost() >= 0){
+            animal.energy -= var.getDailyEnergyCost();
             changeAnimalPosition(animal, var, map); //zmiana pozycji
+
         }
         else{
             animal.diedDate = animal.age;

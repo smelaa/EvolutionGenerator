@@ -23,7 +23,7 @@ public class MainViewController {
     @FXML
     private Label averageEnergyLevel;
     @FXML
-    private Label averageDeadEnergyLevel;
+    private Label averageDeadAgeLevel;
     @FXML
     private Label genome;
     @FXML
@@ -68,7 +68,7 @@ public class MainViewController {
             numberOfEmptyFields.setText(String.valueOf(engine.getMapStats().freeSpots()));
             theMostPopularGenome.setText(engine.getMapStats().theMostCommonGenotype());
             averageEnergyLevel.setText(String.valueOf(engine.getMapStats().averageEnergyAlive()));
-            averageDeadEnergyLevel.setText(String.valueOf(engine.getMapStats().averageEnergyDead()));
+            averageDeadAgeLevel.setText(String.valueOf(engine.getMapStats().averageAgeDead()));
     }
     private void updateFollowedAnimalLabels(){
         //updatuje informacje w labelach śledzonego zwierzaka

@@ -10,14 +10,23 @@ public class LittleAdjustment implements IMutationModel{
         Random generator = new Random();
         int mutationsNumber=generator.nextInt(child.genes.length);
         List<Integer> toMutate= new ArrayList<>();
-        for (int i = 0; i < child.genes.length; i++){toMutate.add(i);}
+        for (int i = 0; i < child.genes.length; i++){toMutate.add(child.genes[i].toNumber());}
         for (int i = 0; i < mutationsNumber; i++){
             int ix= generator.nextInt(toMutate.size());
             if (generator.nextBoolean()){
-                child.genes[toMutate.remove(ix)]=child.genes[toMutate.remove(ix)].add(1);
+                if (child.genes[ix].toNumber() == 7){
+                    child.genes[ix] = Direction.NORTH;
+                }
+                else{
+                    child.genes[ix]=Direction.numberToDirection(toMutate.get(ix) + 1);
+                }
+
             }
             else{
-                child.genes[toMutate.remove(ix)]=child.genes[toMutate.remove(ix)].add(-1);
+                if(child.genes[ix].toNumber() == 0){
+                    child.genes[ix] = Direction.NORTHWEST;
+                }
+                child.genes[ix]=Direction.numberToDirection(toMutate.get(ix) - 1);
             }
         }
 

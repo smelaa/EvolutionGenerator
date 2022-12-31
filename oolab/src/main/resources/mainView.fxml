@@ -78,8 +78,8 @@
                         <Label fx:id="numberOfEmptyFields" text="numberOfEmptyFields" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label fx:id="theMostPopularGenome" text="theMostPopularGenome" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <Label fx:id="averageEnergyLevel" text="averageEnergyLevel" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label fx:id="averageDeadEnergyLevel" text="averageDeadEnergyLevel" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label text=" Average dead energy level " GridPane.rowIndex="5" />
+                        <Label fx:id="averageDeadAgeLevel" text="averageDeadAgeLevel" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label text=" Average dead age level " GridPane.rowIndex="5" />
                      </children>
                   </GridPane>
                </children>

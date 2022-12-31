@@ -13,11 +13,13 @@ public class HellMap implements IMapType {
         var.getBehaviorModel().geneBehaviour(animal);
 
         //jeśli zwierzę może się poruszyć
-        if (animal.energy - 1 >= 0){
+        if (animal.energy - var.getDailyEnergyCost() >= 0){
+            animal.energy -= var.getDailyEnergyCost();
             changeAnimalPosition(animal, var, map); //zmiana pozycji
+
         }
         else{
-            animal.diedDate = animal.age;
+            animal.diedDate = animal.getAge();
             map.setDiedAnimals(map.getDiedAnimals() + 1);
             map.addToDiedList(animal);
         }
@@ -42,11 +44,18 @@ public class HellMap implements IMapType {
             if (animal.energy - var.getMinEnergyForCopulation() >= 0) {
                 animal.energy -= var.getMinEnergyForCopulation();
                 Random generator = new Random();
-                map.setAnimalsOnField(animal.getPosition(), posAfterMovement);
-                animal.changePosition(new Vector2d(generator.nextInt(mapWidth), generator.nextInt(mapHeight)));
+                posAfterMovement = new Vector2d(generator.nextInt(mapWidth), generator.nextInt(mapHeight));
+            }
+            else{
+                animal.diedDate = animal.age;
+                map.setDiedAnimals(map.getDiedAnimals() + 1);
+                map.addToDiedList(animal);
+                return;
             }
 
         }
+        map.setAnimalsOnField(animal.getPosition(), posAfterMovement);
+        animal.changePosition(posAfterMovement);
     }
 }
 
