@@ -30,6 +30,7 @@ public class Map {
     }
     public void placeAnimalOnMap(Animal animal){
         animalsOnField.add(animal);
+        stats.addGenesToGenomes(animal.genesToString());
         Integer animalsOnSpot=numberOfAnimalsOnField.remove(animal.getPosition());
         if (animalsOnSpot == null){animalsOnSpot=0;}
         numberOfAnimalsOnField.put(animal.getPosition(),animalsOnSpot+1);
@@ -52,6 +53,7 @@ public class Map {
 
     protected void removeAnimal(Animal animal){
         animalsOnField.remove(animal); //usunięcie z listy zwierząt
+        stats.removeGenesToGenomes(animal.genesToString());
         int tmp = numberOfAnimalsOnField.remove(animal.getPosition());
         if (tmp - 1 != 0){
             numberOfAnimalsOnField.put(animal.getPosition(), tmp - 1);
@@ -139,5 +141,9 @@ public class Map {
 
     public HashMap<Vector2d, Grass> getGrassOnField() {
         return grassOnField;
+    }
+
+    public String getTheMostPopularGenome(){
+        return stats.getTheMostPopularGenome();
     }
 }

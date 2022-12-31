@@ -1,5 +1,8 @@
 package agh.ics.oop;
 
+import agh.ics.oop.gui.MainViewController;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -47,6 +50,8 @@ public class Animal {
         energy = energy1 + energy2;
         mommy.energy -= energy1;
         daddy.energy -= energy2;
+        mommy.children+=1;
+        daddy.children+=1;
         int fromMommy=mommy.genesToSucceed(daddy);
         if (generator.nextBoolean()){
             try {
@@ -99,13 +104,22 @@ public class Animal {
         return round(energy/(other.getEnergy()+energy)*genes.length);
     }
 
-    public Circle getImage(Double size) {
+    public Circle getImage(Double size, MainViewController follower) {
         Color color;
         try{
             color=new Color((double) (map.getMaxEnergy() - energy) /map.getMaxEnergy(),0, (double) energy /map.getMaxEnergy(),1);
         }
         catch(Exception ex){color=Color.BLACK; ex.printStackTrace(); ex.printStackTrace();}
         Circle circle = new Circle(size/2, color);
+        if (genesToString().equals(map.getTheMostPopularGenome())){
+            circle.setStroke(Color.valueOf("#fff705"));
+        }
+        circle.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                followMe(follower);
+            }
+        });
         return circle;
     }
     public Map getMap() {
@@ -115,4 +129,38 @@ public class Animal {
     public int getAge(){
         return age;
     }
+    private void followMe(MainViewController follower){follower.follow(this);}
+
+    public String genesToString(){
+        String genome = "";
+        for (Direction gene : genes){
+            genome += gene.toString();
+        }
+        return genome;
+    }
+
+    public Direction getActiveJeans(){
+        return genes[activeGeneIx];
+    }
+    public int getGrassEaten() {
+        return grassEaten;
+    }
+    public int getChildren() {
+        return children;
+    }
+
+    public String diedDateToString() {
+        if (diedDate==0){return "I'm still standing";}
+        else{return String.valueOf(diedDate);}
+    }
+
+    public String ageToString(){
+        if (diedDate==0){return String.valueOf(age);}
+        else{return "Another one bites a dust";}
+    }
+
+    public boolean isAlive(){
+        return diedDate==0;
+    }
+
 }
