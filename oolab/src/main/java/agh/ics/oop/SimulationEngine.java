@@ -3,6 +3,7 @@ package agh.ics.oop;
 import agh.ics.oop.gui.MainViewApp;
 import javafx.application.Platform;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -15,6 +16,7 @@ public class SimulationEngine implements Runnable{
     private int howManyDays = 0;
     private MainViewApp observer;
     private boolean threadSuspended=false;
+    private boolean interrupted=false;
 
 
     public SimulationEngine(SimulationVar variables, MainViewApp observer){
@@ -125,7 +127,9 @@ public class SimulationEngine implements Runnable{
             }
         }
     }
-    public void stop(){}
+    public void stop(){
+        interrupted=true;
+    }
 
     @Override
     public void run() {
@@ -139,7 +143,7 @@ public class SimulationEngine implements Runnable{
 //
 //        };
 
-        while(map.getStats().getAmountOfAnimals()>0){
+        while(map.getStats().getAmountOfAnimals()>0 && !interrupted){
             Platform.runLater(()->{dayRitual();});
             Platform.runLater(()->{observer.newDayUpdate();});
             try {
@@ -152,6 +156,11 @@ public class SimulationEngine implements Runnable{
                 e.printStackTrace();
             }
         }
+
+        Thread.currentThread().interrupt();
+        Platform.runLater(()->{observer.showEndScene();});
+
+
     }
 
     public Statistics getMapStats(){return map.getStats();}

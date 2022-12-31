@@ -6,6 +6,11 @@ import javafx.geometry.HPos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import static java.lang.Math.min;
 
@@ -58,6 +63,11 @@ public class MainViewController {
         engine.pause();
     }
     @FXML
+    public void stopButtonAction(){
+        engine.play();
+        engine.stop();
+    }
+    @FXML
     public void stopFollowingAnimal(){
 
     }
@@ -106,16 +116,24 @@ public class MainViewController {
 
     }
 
-
     public void newDayUpdate(){
         updateLabels();
         renderMap();
         //updateFollowedAnimalLabels
     }
 
-    public void stopSimulation(){
-        engine.stop();
-        //cos tam nam zrob
+    public void showEndScene() {
+        mapBox.getChildren().clear();
+        try {
+            ImageView image = new ImageView(new Image(new FileInputStream("oolab/src/main/resources/theend.jpg")));
+            image.setFitWidth(WIDTH);
+            image.setFitHeight(HEIGHT);
+            mapBox.getChildren().addAll(image);
+
+        } catch (FileNotFoundException e) {
+            mapBox.getChildren().addAll(new Label("THE END :("));
+        }
+
     }
 
 }

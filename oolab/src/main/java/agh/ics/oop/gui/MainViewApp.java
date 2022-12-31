@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class MainViewApp extends Application {
@@ -36,6 +37,7 @@ public class MainViewApp extends Application {
     public void newDayUpdate(){
         controller.newDayUpdate();
     }
+    public void showEndScene() {controller.showEndScene();}
 
 
 }
