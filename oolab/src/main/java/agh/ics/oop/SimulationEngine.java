@@ -104,8 +104,6 @@ public class SimulationEngine implements Runnable{
 
 
 
-
-
         //zasianie roślin
         variables.getGardener().seedGrass(variables, map);
         //update informacji o maksymalnej enrgii
@@ -133,19 +131,13 @@ public class SimulationEngine implements Runnable{
 
     @Override
     public void run() {
-//        Object[] statistics = new Object[]{
-//                map.getStats().getAmountOfAnimals(),
-//                map.getStats().getAmountOfGrass(),
-//                map.getStats().freeSpots(),
-//                map.getStats().theMostCommonGenotype(),
-//                map.getStats().averageEnergyAlive(),
-//                map.getStats().averageAgeDead()
-//
-//        };
 
         while(map.getStats().getAmountOfAnimals()>0 && !interrupted){
             Platform.runLater(()->{dayRitual();});
             Platform.runLater(()->{observer.newDayUpdate();});
+            Platform.runLater(()->{
+                if (variables.isPrintToFile()){map.getStats().printToFile(variables.getFileMenager());}
+            });
             try {
                 Thread.sleep(variables.getRefreshTime());
                 synchronized(this) {
@@ -170,4 +162,8 @@ public class SimulationEngine implements Runnable{
     public Map getMap() {
         return map;
     }
+    public int getHowManyDays() {
+        return howManyDays;
+    }
+
 }

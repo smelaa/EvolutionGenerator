@@ -1,6 +1,8 @@
 package agh.ics.oop;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 
 import static java.lang.Math.max;
 
@@ -9,6 +11,8 @@ public class Statistics {
 
     private int amountOfGrass;
     private HashMap<Vector2d, Integer> diedAnimals=new HashMap<Vector2d, Integer>();
+    private HashMap<String, Integer> genomes=new HashMap<String, Integer>();
+    private String theMostPopularGenome="";
 
     public Statistics(Map map) {
         this.map=map;
@@ -45,44 +49,33 @@ public class Statistics {
             return 0;
         }
     }
-
+    public void addGenesToGenomes(String genes){
+        if (genomes.containsKey(genes)){
+            genomes.put(genes,genomes.remove(genes)+1);
+        }
+        else genomes.put(genes,1);
+    }
+    public void removeGenesToGenomes(String genes){
+        if (genomes.containsKey(genes)){
+            if (genomes.get(genes)==1){
+                genomes.remove(genes);
+            }
+            else genomes.put(genes,genomes.remove(genes)-1);
+        }
+        //else houston mamy problem
+    }
     //najpopularniejszy genotyp
     public String theMostCommonGenotype(){
-        int maxi = 0;
-        String popular = "";
-
-        HashMap<String, Integer> genotypes = new HashMap<String, Integer>();
-        ArrayList<Animal> animals = map.getAnimalsOnField();
-
-//to jest straszne, trzeba poprawić - nie zawsze działa, nie rozumiem dlaczego czasami jest a czasami nie
-        for (Animal animal: animals){
-            String gene = "";
-            for (Direction genes : animal.genes){
-                gene += genes.toString();
-            }
-
-            if (genotypes.containsKey(gene)){
-                int count = genotypes.remove(gene);
-                genotypes.put(gene, count + 1);
-                if (count + 1 > maxi){
-                    maxi = count + 1;
-                    popular = gene;
-                }
-            }
-            else{
-                genotypes.put(gene, 1);
+        Integer maxVal= Collections.max(genomes.values());
+        for (String genes: genomes.keySet()){
+            if (genomes.get(genes).equals(maxVal)){
+                theMostPopularGenome=genes;
+                return genes;
             }
         }
-
-        return popular;
-
-//        StringBuilder stringBuilder = new StringBuilder();
-//        for (Direction gene: popular){
-//            stringBuilder.append(gene.toString());
-//        }
-//
-//        return stringBuilder.toString();
+        return "";
     }
+
 
     //średnia energia żyjących zwierząt
     public int averageEnergyAlive(){
@@ -116,6 +109,18 @@ public class Statistics {
 
         return sum / map.getDiedAnimals();
     }
-
-
+    public void printToFile(FileMenager fileMenager){
+        Object[] statistics = new Object[]{
+                getAmountOfAnimals(),
+                getAmountOfGrass(),
+                freeSpots(),
+                theMostCommonGenotype(),
+                averageEnergyAlive(),
+                averageAgeDead()
+        };
+        fileMenager.dayStats(statistics);
+    }
+    public String getTheMostPopularGenome() {
+        return theMostPopularGenome;
+    }
 }

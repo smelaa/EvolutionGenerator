@@ -1,5 +1,6 @@
 package agh.ics.oop;
 
+import java.io.IOException;
 import java.util.List;
 
 public class SimulationVar {
@@ -7,6 +8,8 @@ public class SimulationVar {
     private final IHolyGardener gardener;
     private final IMutationModel mutationModel;
     private final IBehaviorModel behaviorModel;
+    private final boolean printToFile;
+    private final FileMenager fileMenager=new FileMenager();
     private final int mapHeight;
     private final int mapWidth;
     private final int grassEnergyProfit;
@@ -19,7 +22,22 @@ public class SimulationVar {
     private final int genomeLength;
     //bardzo brzydkie, aż nam wstyd:(
     public SimulationVar(List<String> var) throws IllegalArgumentException{
-        if (var.size()!=14){throw new IllegalArgumentException("wrong number of arguments");}
+        if (var.size()!=15 && var.size()!=16){throw new IllegalArgumentException("wrong number of arguments");}
+        switch(var.get(14)){
+            case "false"->{
+                if (var.size()==16){throw new IllegalArgumentException("wrong number of arguments");}
+                printToFile=false;
+            }
+            case "true"-> {
+                if (var.size()!=16){throw new IllegalArgumentException("wrong number of arguments");}
+                printToFile=true;
+                try{
+                    fileMenager.setFileName(var.get(15));
+                }
+                catch(IOException ex){throw new IllegalArgumentException("wrong argument");}
+            }
+            default -> throw new IllegalArgumentException("wrong argument");
+        }
         switch(var.get(0)){
             case "GlobMap"->this.mapType=new GlobMap();
             case "HellMap"->this.mapType=new HellMap();
@@ -115,6 +133,12 @@ public class SimulationVar {
 
     public int getGenomeLength() {
         return genomeLength;
+    }
+    public boolean isPrintToFile() {
+        return printToFile;
+    }
+    public FileMenager getFileMenager() {
+        return fileMenager;
     }
 
 }
