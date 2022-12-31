@@ -158,7 +158,7 @@
                         <Label text="- Empty Field" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <Circle fill="LIME" radius="10.0" stroke="LIME" strokeType="INSIDE" GridPane.rowIndex="2" />
                         <Circle fill="BLUE" radius="10.0" stroke="BLUE" strokeType="INSIDE" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b9fcf4" height="21.0" stroke="#b9fcf4" strokeType="INSIDE" width="21.0" GridPane.rowIndex="3" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fa75dd" height="21.0" stroke="#fa75dd" strokeType="INSIDE" width="21.0" GridPane.rowIndex="3" />
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffa8ec" height="21.0" stroke="#ffa8ec" strokeType="INSIDE" width="21.0" GridPane.rowIndex="4" />
                         <Label text="- Animal (0 energy)" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Circle fill="RED" layoutX="21.0" layoutY="24.0" radius="10.0" stroke="RED" strokeType="INSIDE" GridPane.rowIndex="1" />
