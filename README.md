@@ -9,7 +9,7 @@ Program to sumulacja ewolucji, która pozwala zobaczyć proces rozwoju zwierząt
 
 
 
-##Jak wczytywać dane do pliku?
+## Jak wczytywać dane do pliku?
 Jak dobrze wiemy, wiele zdarzeń zależy od fazy księżyca, ułożenia gwiazd na nieboskłonie czy tego, którą nogą wstała dzisiaj Pani Basia, która jest sprzedawczynią w naszym ulubionym sklepie. 
 Nasz program uwzględnia prawie wszystkie te możliwości, a bynajmniej niektóre z nich. No kilka. Ale takie ważniejsze.
 
@@ -43,7 +43,7 @@ Kolejność wpisywania danych:
 Gdy nie chcemy zapisywać statystyk do oddzielnego pliku, w argumencie 15) wpisujemy wartość *false* (nie wypełniamy już argumentu 16) ).
 
 
-##Filmiki:
+## Filmiki:
 https://www.youtube.com/watch?v=dQw4w9WgXcQ
 
 
