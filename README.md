@@ -5,7 +5,7 @@
 
 **EvolutionGenerator** to projekt stworzony na potrzeby przedmiotu "Programowanie Obiektowe" na kierunku Informatyka na Akademii Górniczo-Hutniczej. Autorkami programu są **Aleksandra Smela oraz Julia Smerdel**.
 
-Program to sumulacja ewolucji, która pozwala zobaczyć proces rozwoju zwierząt w zależności od wybranych wariantów świata, umożliwia śledzenie ich statystyk oraz zapisywanie danych do plików CSV. Więcej szczegółów można znaleźć pod linkiem: https://github.com/apohllo/obiektowe-lab/tree/master/proj1 .
+Program to symulacja ewolucji, która pozwala zobaczyć proces rozwoju zwierząt w zależności od wybranych wariantów świata, umożliwia śledzenie ich statystyk oraz zapisywanie danych do plików CSV. Więcej szczegółów można znaleźć pod linkiem: https://github.com/apohllo/obiektowe-lab/tree/master/proj1 .
 
 
 
