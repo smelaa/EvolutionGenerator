@@ -1,7 +1,7 @@
 # EvolutionGenerator
 ## Najpiękniejszy generator ewolucyjny, jaki widziała ludzkość.
 
-*Dawno, dawno temu, dawniej niż narodziła się Maryla Rodowicz, powstały pierwsze istoty ziemskie. Wciąż wiemy o nich niewiele, jednak umiemy wyobrazić sobie jak wyglądał proces ich tworzenia. Ba! Umiemy to nawet zaimplementować!*
+*Dawno, dawno temu, dawniej niż narodziła się Maryla Rodowicz (tak, da się, też się zdziwiłyśmy!), powstały pierwsze istoty ziemskie. Wciąż wiemy o nich niewiele, jednak umiemy wyobrazić sobie jak wyglądał proces ich tworzenia. Ba! Umiemy to nawet zaimplementować!*
 
 **EvolutionGenerator** to projekt stworzony na potrzeby przedmiotu "Programowanie Obiektowe" na kierunku Informatyka na Akademii Górniczo-Hutniczej. Autorkami programu są **Aleksandra Smela oraz Julia Smerdel**.
 
@@ -39,7 +39,9 @@ Kolejność wpisywania danych:
 13) czas odświeżania symulacji (wartość podawana w milisekundach)
 14) długość genomu
 15) true/false
-*Ad 15)* jeśli chcemy, aby statystyki z każdego dnia symulacji zapisywanie były do nowego pliku CSV, koniecznie jest wpisanie w tym polu wartości *true*. Wtedy podajemy również ścieżkę do stworzonego już przez nas pliku (dodajemy argument 16), który zawiera ścieżkę do tegoż pliku). 
+
+*Ad 15)* jeśli chcemy, aby statystyki z każdego dnia symulacji zapisywane były w nowym pliku CSV, konieczne jest wpisanie w tym polu wartości *true*. Wtedy w argumencie 16) podajemy również ścieżkę do stworzonego już przez nas pliku. 
+
 Gdy nie chcemy zapisywać statystyk do oddzielnego pliku, w argumencie 15) wpisujemy wartość *false* (nie wypełniamy już argumentu 16) ).
 
 
