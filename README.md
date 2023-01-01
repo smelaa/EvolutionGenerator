@@ -45,6 +45,17 @@ Kolejność wpisywania danych:
 Gdy nie chcemy zapisywać statystyk do oddzielnego pliku, w argumencie 15) wpisujemy wartość *false* (nie wypełniamy już argumentu 16) ).
 
 
+## Co, jak, z czym
+Gdyby do kogoś nie przemówił rożowy, piękny kolor gui, spieszymy z pomocą i tłumaczymy, z czym to się je. Ale od początku.
+
+Po wpisaniu ścieżki do pliku, wyświetla się najcudowniejsze okno dialogowe. W lewym górnym rogu znajduja się dwa przyciski: PLAY oraz PAUSE. Jak nazwa wskazuje, przycisk PAUSE odpowiada za zatrzymanie symulacji, a przycisk PLAY za jej wznowienie. 
+Pod spodem zaś umieszczone są statystyki symulacji oraz statystyki aktualnie śledzonego zwierzaczka (zwierzaczki są okrąglutkie - ale to samo futerko! Nasze zwierzaczki są fit, nie są grubaskami, zapewniamy!). Aby zacząć śledzić zwierzaka, wystarczy kliknąć na niego lewym przyciskiek myszy - wtedy zwierzako-kulka zmieni kolor na zielony.
+Zwierzaki z najpopularniejszym genomem wyróżnione są za pomocą żółtego obramowania.
+Po prawej stronie, nie do przeoczenia ze względu na swą wyjątkowość, estetykę i inne arybuty, widoczna jest mapa. To właśnie na niej można śledzić symulację.
+Pod mapą znajduje się przycisk STOP SIMULATION, który zatrzymuje symulację.
+
+
+
 ## Filmiki:
 https://www.youtube.com/watch?v=dQw4w9WgXcQ
 
