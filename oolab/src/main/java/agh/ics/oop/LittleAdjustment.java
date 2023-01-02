@@ -3,7 +3,6 @@ package agh.ics.oop;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 public class LittleAdjustment implements IMutationModel{
     @Override
     public void mutate(Animal child) {
@@ -20,7 +19,6 @@ public class LittleAdjustment implements IMutationModel{
                 else{
                     child.genes[ix]=Direction.numberToDirection(toMutate.get(ix) + 1);
                 }
-
             }
             else{
                 if(child.genes[ix].toNumber() == 0){

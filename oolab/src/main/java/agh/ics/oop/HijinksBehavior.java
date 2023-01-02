@@ -3,7 +3,6 @@ package agh.ics.oop;
 import java.util.Random;
 
 public class HijinksBehavior implements IBehaviorModel{
-
     @Override
     public void geneBehaviour(Animal animal){
         //losujemy liczbę od 0 do 9

@@ -1,13 +1,9 @@
 package agh.ics.oop.gui;
 
 import agh.ics.oop.*;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.HPos;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -185,7 +181,7 @@ public class MainViewController {
 
     public String getEndPicPath(){
         Random random = new Random();
-        int number=random.nextInt(9);
+        int number=random.nextInt(10);
         return switch (number){
             case 0 -> "oolab/src/main/resources/theendpics/theend0.jpg";
             case 1 -> "oolab/src/main/resources/theendpics/theend1.jpg";
@@ -196,7 +192,7 @@ public class MainViewController {
             case 6 -> "oolab/src/main/resources/theendpics/theend6.jpg";
             case 7 -> "oolab/src/main/resources/theendpics/theend7.jpg";
             case 8 -> "oolab/src/main/resources/theendpics/theend8.jpg";
-            //case 9 -> "oolab/src/main/resources/theendpics/theend9.jpg";
+            case 9 -> "oolab/src/main/resources/theendpics/theend9.jpg";
             default -> "oolab/src/main/resources/theendpics/theend.jpg";
         };
 

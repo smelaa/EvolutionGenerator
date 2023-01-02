@@ -5,8 +5,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
-import java.net.URL;
-
 public class App extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {

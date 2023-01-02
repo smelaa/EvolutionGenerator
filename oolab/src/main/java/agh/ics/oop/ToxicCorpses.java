@@ -1,7 +1,6 @@
 package agh.ics.oop;
 
 import java.util.*;
-
 import static java.lang.Math.max;
 import static java.lang.Math.round;
 

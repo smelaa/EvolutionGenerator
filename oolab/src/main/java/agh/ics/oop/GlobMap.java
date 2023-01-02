@@ -1,8 +1,5 @@
 package agh.ics.oop;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-
 public class GlobMap implements IMapType{
 
 
@@ -26,7 +23,6 @@ public class GlobMap implements IMapType{
 
 
     }
-
 
     protected void changeAnimalPosition(Animal animal, SimulationVar var, Map map){
         Direction[] genes = animal.genes;
@@ -58,7 +54,5 @@ public class GlobMap implements IMapType{
 
         map.setAnimalsOnField(animal.getPosition(), posAfterMovement);
         animal.changePosition(posAfterMovement);
-
     }
-
 }

@@ -2,23 +2,17 @@ package agh.ics.oop;
 
 import agh.ics.oop.gui.MainViewApp;
 import javafx.application.Platform;
-
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
 
 
 public class SimulationEngine implements Runnable{
     SimulationVar variables;
-
     private Map map;
     private int howManyDays = 0;
     private MainViewApp observer;
     private boolean threadSuspended=false;
     private boolean interrupted=false;
-
-
     public SimulationEngine(SimulationVar variables, MainViewApp observer){
         this.map = new Map(variables);
         this.variables = variables;
@@ -38,8 +32,6 @@ public class SimulationEngine implements Runnable{
         for (Animal animal : diedAnimalsToday){
             map.removeAnimal(animal);
         }
-
-
 
         //poruszamy wszystkie zwierzątka
         for (Animal animal:map.getAnimalsOnField()){
@@ -148,17 +140,11 @@ public class SimulationEngine implements Runnable{
                 e.printStackTrace();
             }
         }
-
         Thread.currentThread().interrupt();
         Platform.runLater(()->{observer.showEndScene();});
-
-
     }
 
     public Statistics getMapStats(){return map.getStats();}
-    public int getMapHeight(){return map.getHeight();}
-    public int getMapWidth(){return map.getWidth();}
-
     public Map getMap() {
         return map;
     }

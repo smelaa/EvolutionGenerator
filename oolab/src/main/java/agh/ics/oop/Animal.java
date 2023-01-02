@@ -5,12 +5,8 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-
 import java.util.Random;
-
-import static java.lang.Math.min;
 import static java.lang.Math.round;
-import static java.lang.Math.max;
 
 public class Animal {
     protected Direction orientation;

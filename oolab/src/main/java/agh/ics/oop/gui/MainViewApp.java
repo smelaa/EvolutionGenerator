@@ -7,12 +7,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class MainViewApp extends Application {
-    private Animal followedAnimal;
     private Thread engineThread;
     private SimulationEngine engine;
     private MainViewController controller;

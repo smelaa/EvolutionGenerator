@@ -1,12 +1,8 @@
 package agh.ics.oop;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Random;
 
 public class HellMap implements IMapType {
-
-
     @Override
     public void moveOnMap(Animal animal, SimulationVar var, Map map){
 
@@ -23,11 +19,7 @@ public class HellMap implements IMapType {
             map.setDiedAnimals(map.getDiedAnimals() + 1);
             map.addToDiedList(animal);
         }
-
-
-
     }
-
 
     protected void changeAnimalPosition(Animal animal, SimulationVar var, Map map){
         Direction[] genes = animal.genes;
@@ -52,7 +44,6 @@ public class HellMap implements IMapType {
                 map.addToDiedList(animal);
                 return;
             }
-
         }
         map.setAnimalsOnField(animal.getPosition(), posAfterMovement);
         animal.changePosition(posAfterMovement);

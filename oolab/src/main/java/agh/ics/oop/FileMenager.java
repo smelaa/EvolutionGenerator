@@ -54,6 +54,4 @@ public final class FileMenager {
         return "FileMenager[" +
                 "filename=" + filename + ']';
     }
-
-
 }
