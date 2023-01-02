@@ -16,6 +16,7 @@ public final class FileMenager {
         this.filename = filename;
         PrintWriter output = new PrintWriter(new FileWriter(filename));
         output.println("AllAnimals;AllPlants;FreeSpots;MostPopularGenotype;AverageEnergyAlive;AverageEnergyDead");
+        output.flush();
     }
 
     public void dayStats(Object[] statistics) {
