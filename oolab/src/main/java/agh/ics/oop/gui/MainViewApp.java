@@ -29,6 +29,10 @@ public class MainViewApp extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         controller=fxmlLoader.getController();
         controller.initial(engine);
+        primaryStage.setOnCloseRequest(e -> {
+            primaryStage.close();
+            ((MainViewController) fxmlLoader.getController()).stopButtonAction();
+        });
         primaryStage.setTitle("Evolution simulation");
         primaryStage.setScene(scene);
         primaryStage.show();
