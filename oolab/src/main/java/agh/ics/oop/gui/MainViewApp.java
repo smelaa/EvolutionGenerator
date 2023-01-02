@@ -1,6 +1,6 @@
 package agh.ics.oop.gui;
 
-import agh.ics.oop.Animal;
+
 import agh.ics.oop.SimulationEngine;
 import agh.ics.oop.SimulationVar;
 import javafx.application.Application;

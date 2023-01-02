@@ -2,7 +2,8 @@ package agh.ics.oop.gui;
 
 import agh.ics.oop.*;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -136,15 +137,15 @@ public class MainViewController {
                     {
                         Circle animalImage=new Circle(min(WIDTH/engine.getMap().getWidth(),HEIGHT/engine.getMap().getHeight())/2.0, new Color(0,1,0,1));
                         newPane.add(animalImage,0,0);
-                        //newPane.setHalignment(animalImage, HPos.CENTER);
-                        newPane.setAlignment(Pos.CENTER);
+                        newPane.setValignment(animalImage, VPos.CENTER);
+                        newPane.setHalignment(animalImage, HPos.CENTER);
                     }
                     else if (engine.getMap().isAnimalThere(position)){
                         Animal animal=engine.getMap().getAnimalOnSpot(position);
                         Circle animalImage=animal.getImage(min(WIDTH/engine.getMap().getWidth(),HEIGHT/engine.getMap().getHeight()),this);
                         newPane.add(animalImage,0,0);
-                        //newPane.setHalignment(animalImage, HPos.CENTER);
-                        newPane.setAlignment(Pos.CENTER);
+                        newPane.setValignment(animalImage, VPos.CENTER);
+                        newPane.setHalignment(animalImage, HPos.CENTER);
                     }
                     map.add(newPane,x,engine.getMap().getHeight()-1-y);
 

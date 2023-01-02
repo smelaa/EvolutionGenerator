@@ -9,7 +9,6 @@ import static java.lang.Math.max;
 public class Statistics {
     private Map map;
 
-    private int amountOfGrass;
     private HashMap<Vector2d, Integer> diedAnimals=new HashMap<Vector2d, Integer>();
     private HashMap<String, Integer> genomes=new HashMap<String, Integer>();
     private String theMostPopularGenome="";
@@ -66,11 +65,13 @@ public class Statistics {
     }
     //najpopularniejszy genotyp
     public String theMostCommonGenotype(){
-        Integer maxVal= Collections.max(genomes.values());
-        for (String genes: genomes.keySet()){
-            if (genomes.get(genes).equals(maxVal)){
-                theMostPopularGenome=genes;
-                return genes;
+        if (genomes.size()>0){
+            Integer maxVal= Collections.max(genomes.values());
+            for (String genes: genomes.keySet()){
+                if (genomes.get(genes).equals(maxVal)){
+                    theMostPopularGenome=genes;
+                    return genes;
+                }
             }
         }
         return "";
