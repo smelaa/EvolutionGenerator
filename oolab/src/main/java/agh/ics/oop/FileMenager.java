@@ -15,7 +15,7 @@ public final class FileMenager {
     public void setFileName(String filename) throws IOException {
         this.filename = filename;
         PrintWriter output = new PrintWriter(new FileWriter(filename));
-        output.println("AllAnimals;AllPlants;FreeSpots;MostPopularGenotype;AverageEnergyAlive;AverageEnergyDead");
+        output.println("AllAnimals;AllPlants;FreeSpots;MostPopularGenotype;AverageEnergyAlive;AverageAgeDead");
         output.flush();
     }
 
