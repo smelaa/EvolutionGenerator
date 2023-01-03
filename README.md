@@ -57,7 +57,8 @@ Pod mapą znajduje się przycisk STOP SIMULATION, który zatrzymuje symulację (
 
 
 ## Filmiki:
-https://www.youtube.com/watch?v=dQw4w9WgXcQ
+https://www.youtube.com/watch?v=dQw4w9WgXcQ 
+
 https://youtu.be/XY8TYyofOXM
 
 
