@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="agh.ics.oop.gui.ConfigurationController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="191.5" minWidth="4.0" prefWidth="55.5" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="505.5" minWidth="10.0" prefWidth="243.5" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.5" minWidth="10.0" prefWidth="52.5" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="91.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="133.5" minHeight="10.0" prefHeight="92.5" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="69.5" minHeight="10.0" prefHeight="52.5" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <VBox alignment="CENTER" prefHeight="102.0" prefWidth="227.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+            <Label text="Enter config file path" />
+            <TextField fx:id="filePath" />
+            <Button mnemonicParsing="false" onAction="#startSimulation" text="START SIMULATION" />
+         </children>
+      </VBox>
+      <VBox alignment="BOTTOM_CENTER" GridPane.columnIndex="1">
+         <children>
+            <Label contentDisplay="CENTER" text="Choose evolution configuration!" textFill="#ff00c3">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" prefHeight="34.0" prefWidth="227.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <children>
+            <Label fx:id="infoLabel" alignment="CENTER" contentDisplay="CENTER" textAlignment="CENTER" wrapText="true" />
+         </children></VBox>
+   </children>
+</GridPane>
